@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 // This algo only works with sorted arrays
-func binary_search(arr []int, lo int, hi int, n int) bool {
+func binary_search_old(arr []int, lo int, hi int, n int) bool {
 
 	for lo < hi {
 
@@ -22,11 +22,13 @@ func binary_search(arr []int, lo int, hi int, n int) bool {
 	return false
 }
 
-func binary_search_v2(arr []int, n int) bool {
+func binary_search(arr []int, n int) bool {
 
 	var lo int = 0
 	var hi int = len(arr)
+
 	for lo < hi {
+
 		mid := lo + (hi-lo)/2
 		v := arr[mid]
 
@@ -43,6 +45,6 @@ func binary_search_v2(arr []int, n int) bool {
 
 func print_binary_search() {
 	var arr = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
-	fmt.Printf("Is the number in the array? %t", binary_search_v2(arr, 12))
+	fmt.Printf("Is the number in the array? %t", binary_search(arr, 12))
 
 }
