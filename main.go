@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func main() {
-	fmt.Println("vim-go")
+	print_binary_search()
 }
