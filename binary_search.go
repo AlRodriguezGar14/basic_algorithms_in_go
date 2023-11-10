@@ -17,7 +17,7 @@ func binary_search_old(arr []int, lo int, hi int, n int) bool {
 		} else {
 			hi = mid
 		}
-		binary_search(arr, lo, hi, n)
+		binary_search_old(arr, lo, hi, n)
 	}
 	return false
 }
