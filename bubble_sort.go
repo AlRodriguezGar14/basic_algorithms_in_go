@@ -33,9 +33,20 @@ func bubble_sort_v2(arr []int) {
 	}
 }
 
+func bubble_sort_v3(arr []int) {
+
+	for i := 0; i < len(arr); i++ {
+		for j := 0; j < len(arr)-1-i; j++ {
+			if arr[j] > arr[j+1] {
+				arr[j], arr[j+1] = arr[j+1], arr[j]
+			}
+		}
+	}
+}
+
 func print_bubble_sort() {
 	var arr = []int{100, 37, 5, 3, 50, 7, 21, 3, 9, 8, 1}
-	bubble_sort_v2(arr)
+	bubble_sort_v3(arr)
 	fmt.Println("The sorted array is:", arr)
 
 }
