@@ -5,5 +5,6 @@ func main() {
 	// print_bubble_sort()
 	// testQueue()
 	// testStack()
-	testQuickSort()
+	// testQuickSort()
+	testBinaryTreeContent()
 }
