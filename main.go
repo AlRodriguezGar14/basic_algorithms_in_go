@@ -6,6 +6,7 @@ func main() {
 	// testQueue()
 	// testStack()
 	// testQuickSort()
-	testBinaryTreeContent()
-	testBreadthFirst()
+	// testBinaryTreeContent()
+	// testBreadthFirst()
+	testCompareBT()
 }
