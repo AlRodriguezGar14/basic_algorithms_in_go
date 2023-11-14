@@ -17,7 +17,7 @@ type minHeap struct {
 }
 
 func heapConstructor() *minHeap {
-	return &minHeap{Length: 0, Data: []int{10, 20, 30, 40, 50, 6, 70}}
+	return &minHeap{Length: 0, Data: []int{}}
 }
 
 func (h *minHeap) InsertHeap(value int) {
@@ -28,8 +28,7 @@ func (h *minHeap) DeleteHeap() int {
 	return 0
 }
 
-func (h *minHeap) HeapifyUp(idx int) {
-	fmt.Println("heapify...")
+func (h *minHeap) heapifyUp(idx int) {
 	if idx == 0 {
 		return
 	}
@@ -37,16 +36,10 @@ func (h *minHeap) HeapifyUp(idx int) {
 	parent := h.parent(idx)
 	parentValue := h.Data[parent]
 	v := h.Data[idx]
-	fmt.Println("parent value", parentValue)
-	fmt.Println("value", v)
 
 	if parentValue > v {
-		fmt.Println("v:", v)
-		fmt.Println("h.Data[parent] pre:", h.Data[parent])
 		h.Data[idx], h.Data[parent] = parentValue, v
-		fmt.Println("h.Data[parent] post:", h.Data[parent])
-		fmt.Println("v:", v)
-		h.HeapifyUp(parent)
+		h.heapifyUp(parent)
 	}
 
 }
@@ -65,6 +58,5 @@ func (h *minHeap) rightChild(idx int) int {
 
 func testHeap() {
 	heap := heapConstructor()
-	heap.HeapifyUp(5)
 	fmt.Println(heap)
 }
