@@ -8,5 +8,6 @@ func main() {
 	// testQuickSort()
 	// testBinaryTreeContent()
 	// testBreadthFirst()
-	testCompareBT()
+	// testCompareBT()
+	testHeap()
 }

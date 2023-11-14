@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // In the heap the values are ordered such a way that they
 // match with the indexes of an array.
@@ -11,6 +13,7 @@ import "fmt"
 // (4)D (5)E   (6)F (7)G
 //
 // [A, B, C, D, E, F, G]
+
 type minHeap struct {
 	Length int
 	Data   []int
@@ -24,7 +27,7 @@ func (h *minHeap) InsertHeap(value int) {
 	if h.Length < cap(h.Data) {
 		h.Data[h.Length] = value
 	} else {
-		newData := make([]int, h.Length+3)
+		newData := make([]int, h.Length+1)
 		copy(newData, h.Data)
 		newData[h.Length] = value
 		h.Data = newData
@@ -33,8 +36,17 @@ func (h *minHeap) InsertHeap(value int) {
 	h.Length++
 }
 
-func (h *minHeap) DeleteHeap() int {
-	return 0
+// Delete the one on top, move the rest, re-balance the tree
+func (h *minHeap) DeleteHeap() (int, error) {
+	out := h.Data[0]
+	h.Length--
+	if h.Length == 0 {
+		h.Data = []int{}
+		return out, nil
+	}
+	h.Data[0] = h.Data[h.Length]
+	h.heapifyDown(0)
+	return out, nil
 }
 
 func (h *minHeap) heapifyUp(idx int) {
@@ -97,10 +109,12 @@ func (h *minHeap) rightChild(idx int) int {
 func testHeap() {
 	heap := heapConstructor()
 	heap.InsertHeap(10)
-	heap.InsertHeap(20)
-	heap.InsertHeap(24)
-	heap.InsertHeap(28)
-	heap.InsertHeap(27)
-	heap.InsertHeap(2)
+	// heap.InsertHeap(20)
+	// heap.InsertHeap(24)
+	// heap.InsertHeap(28)
+	// heap.InsertHeap(27)
+	// heap.InsertHeap(2)
+	fmt.Println(heap)
+	heap.DeleteHeap()
 	fmt.Println(heap)
 }
