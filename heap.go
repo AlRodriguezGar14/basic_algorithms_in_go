@@ -21,7 +21,14 @@ func heapConstructor() *minHeap {
 }
 
 func (h *minHeap) InsertHeap(value int) {
-	h.Data = append(h.Data, value)
+	if h.Length < cap(h.Data) {
+		h.Data[h.Length] = value
+	} else {
+		newData := make([]int, h.Length+3)
+		copy(newData, h.Data)
+		newData[h.Length] = value
+		h.Data = newData
+	}
 	h.heapifyUp(h.Length)
 	h.Length++
 }
