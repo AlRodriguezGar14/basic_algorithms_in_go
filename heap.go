@@ -21,7 +21,9 @@ func heapConstructor() *minHeap {
 }
 
 func (h *minHeap) InsertHeap(value int) {
-
+	h.Data = append(h.Data, value)
+	h.heapifyUp(h.Length)
+	h.Length++
 }
 
 func (h *minHeap) DeleteHeap() int {
@@ -33,15 +35,44 @@ func (h *minHeap) heapifyUp(idx int) {
 		return
 	}
 
-	parent := h.parent(idx)
-	parentValue := h.Data[parent]
+	parentIdx := h.parent(idx)
+	parentValue := h.Data[parentIdx]
 	v := h.Data[idx]
 
 	if parentValue > v {
-		h.Data[idx], h.Data[parent] = parentValue, v
-		h.heapifyUp(parent)
+		h.Data[idx], h.Data[parentIdx] = parentValue, v
+		h.heapifyUp(parentIdx)
 	}
 
+}
+
+func (h *minHeap) heapifyDown(idx int) {
+	if idx >= h.Length {
+		return
+	}
+
+	leftIdx := h.leftChild(idx)
+
+	if leftIdx >= h.Length {
+		return
+	}
+
+	rightIdx := h.rightChild(idx)
+	leftValue := h.Data[leftIdx]
+	rightValue := h.Data[rightIdx]
+	v := h.Data[idx]
+
+	// by design, the right is the small option
+	if leftValue > rightValue && v > rightValue {
+		h.Data[idx] = rightValue
+		h.Data[rightIdx] = v
+		h.heapifyDown(rightIdx)
+	} else if leftValue < rightValue && v < rightValue {
+		h.Data[idx] = leftValue
+		h.Data[leftIdx] = v
+		h.heapifyDown(leftIdx)
+	}
+	return
 }
 
 func (h *minHeap) parent(idx int) int {
@@ -58,5 +89,11 @@ func (h *minHeap) rightChild(idx int) int {
 
 func testHeap() {
 	heap := heapConstructor()
+	heap.InsertHeap(10)
+	heap.InsertHeap(20)
+	heap.InsertHeap(24)
+	heap.InsertHeap(28)
+	heap.InsertHeap(27)
+	heap.InsertHeap(2)
 	fmt.Println(heap)
 }
