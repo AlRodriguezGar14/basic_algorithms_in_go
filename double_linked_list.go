@@ -66,6 +66,32 @@ func (dll *DoubleLinkedList) remove(val int) (*LNode, error) {
 	return &LNode{}, err
 }
 
+func (dll *DoubleLinkedList) insert(index int, data int) {
+	node := &LNode{Data: data}
+	if index > dll.Length-1 {
+		fmt.Println("Unable to insert. Index out of reach")
+		return
+	}
+
+	curr := dll.Head
+
+	for ; index > 0; index-- {
+		curr = curr.Next
+	}
+	if curr.Prev == nil {
+		dll.Head = node
+		dll.Head.Next = curr
+		curr.Prev = dll.Head
+
+	} else {
+		curr.Prev.Next = node
+		node.Prev = curr.Prev
+		curr.Prev = node
+		node.Next = curr
+	}
+	dll.Length++
+}
+
 func test_ListNode() {
 	test := createSLL()
 	test.push(5)
@@ -81,6 +107,17 @@ func test_ListNode() {
 		fmt.Println("removed:", removedNode, "with value", removedNode.Data)
 
 	}
+	test.insert(1, 100)
+	fmt.Println(test.Head.Next.Next.Data)
+	fmt.Println(test.Head.Next.Data)
+	fmt.Println(test.Head.Data)
+	fmt.Println("----------")
+	test.insert(1, 111)
+	fmt.Println(test.Head.Next.Next.Data)
+	fmt.Println(test.Head.Next.Data)
+	fmt.Println(test.Head.Data)
+	test.insert(0, 42)
+	fmt.Println(test.Head.Next.Next.Data)
 	fmt.Println(test.Head.Next.Data)
 	fmt.Println(test.Head.Data)
 }
