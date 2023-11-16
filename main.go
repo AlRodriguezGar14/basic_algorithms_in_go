@@ -9,5 +9,6 @@ func main() {
 	// testBinaryTreeContent()
 	// testBreadthFirst()
 	// testCompareBT()
-	testHeap()
+	// testHeap()
+	test_ListNode()
 }

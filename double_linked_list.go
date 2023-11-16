@@ -62,7 +62,8 @@ func (dll *DoubleLinkedList) remove(val int) (*LNode, error) {
 		}
 		idx++
 	}
-	return removed, nil
+	err := errors.New("No nodes with the provided value found")
+	return &LNode{}, err
 }
 
 func test_ListNode() {
@@ -73,8 +74,13 @@ func test_ListNode() {
 
 	fmt.Println(test.Head.Next.Data)
 	fmt.Println(test.Head.Data)
-	fmt.Println("remove")
-	test.remove(5)
+	removedNode, err := test.remove(60)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("removed:", removedNode, "with value", removedNode.Data)
+
+	}
 	fmt.Println(test.Head.Next.Data)
 	fmt.Println(test.Head.Data)
 }
