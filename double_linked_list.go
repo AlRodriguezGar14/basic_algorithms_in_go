@@ -92,14 +92,26 @@ func (dll *DoubleLinkedList) insert(index int, data int) {
 	dll.Length++
 }
 
+func (dll *DoubleLinkedList) printList() {
+	curr := dll.Head
+
+	fmt.Printf("Values in the list: ")
+	for curr != nil {
+		if curr.Next != nil {
+			fmt.Printf("%d, ", curr.Data)
+		} else {
+			fmt.Printf("%d\n", curr.Data)
+		}
+		curr = curr.Next
+	}
+}
+
 func test_ListNode() {
 	test := createSLL()
 	test.push(5)
 	test.push(60)
 	test.push(70)
 
-	fmt.Println(test.Head.Next.Data)
-	fmt.Println(test.Head.Data)
 	removedNode, err := test.remove(60)
 	if err != nil {
 		fmt.Println(err)
@@ -108,16 +120,11 @@ func test_ListNode() {
 
 	}
 	test.insert(1, 100)
-	fmt.Println(test.Head.Next.Next.Data)
-	fmt.Println(test.Head.Next.Data)
-	fmt.Println(test.Head.Data)
-	fmt.Println("----------")
 	test.insert(1, 111)
-	fmt.Println(test.Head.Next.Next.Data)
-	fmt.Println(test.Head.Next.Data)
-	fmt.Println(test.Head.Data)
 	test.insert(0, 42)
-	fmt.Println(test.Head.Next.Next.Data)
-	fmt.Println(test.Head.Next.Data)
-	fmt.Println(test.Head.Data)
+	test.printList()
+	test.push(423)
+	test.printList()
+	test.remove(100)
+	test.printList()
 }
